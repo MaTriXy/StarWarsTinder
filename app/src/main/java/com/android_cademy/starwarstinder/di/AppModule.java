@@ -1,7 +1,10 @@
 package com.android_cademy.starwarstinder.di;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
+import com.android_cademy.starwarstinder.db.AppDatabase;
+import com.android_cademy.starwarstinder.network.ProfileNetworkDataSource;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
@@ -18,9 +21,13 @@ import javax.inject.Singleton;
     return application.getApplicationContext();
   }
 
-  //@Provides @Singleton AppDatabase providesDatabase(Context context) {
-  //  return Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).build();
-  //}
+  @Provides @Singleton AppDatabase providesDatabase(Context context) {
+    return Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).build();
+  }
+
+  @Provides @Singleton ProfileNetworkDataSource providesProfileNetworkDatasource() {
+    return new ProfileNetworkDataSource();
+  }
   //
   //@Provides @Singleton FirebaseAuth providesFirebaseAuth() {
   //  return FirebaseAuth.getInstance();
