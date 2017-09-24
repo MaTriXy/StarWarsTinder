@@ -1,16 +1,20 @@
 package com.android_cademy.starwarstinder;
 
 import android.app.Application;
+import com.android_cademy.starwarstinder.di.AppComponent;
 import com.android_cademy.starwarstinder.di.AppModule;
-
-/**
- * Created by yoni_levin on 24/09/2017.
- */
+import com.android_cademy.starwarstinder.di.DaggerAppComponent;
 
 public class StarWarsApplication extends Application {
+
+  private AppComponent appComponent;
 
   @Override public void onCreate() {
     super.onCreate();
     appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+  }
+
+  public AppComponent getAppComponent() {
+    return appComponent;
   }
 }
